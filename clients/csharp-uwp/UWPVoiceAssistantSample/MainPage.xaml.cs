@@ -14,6 +14,7 @@ namespace UWPVoiceAssistantSample
     using Windows.Storage;
     using Windows.System;
     using Windows.System.Power;
+    using Windows.UI;
     using Windows.UI.Core;
     using Windows.UI.ViewManagement;
     using Windows.UI.Xaml;
@@ -321,14 +322,40 @@ namespace UWPVoiceAssistantSample
                             Run run = new Run();
                             run.Text = split[1];
                             paragraph.Inlines.Add(run);
+                            if (text.Contains("Information"))
+                            {
+                                paragraph.Foreground = new SolidColorBrush(Colors.Blue);
+                            }
+                            this.ChangeLogTextBlock.Blocks.Add(paragraph);
+                        }
+                        else if (text.Contains("Information"))
+                        {
+                            string[] split = text.Split("Information");
+                            Paragraph paragraph = new Paragraph();
+                            Run run = new Run();
+                            run.Text = split[1];
+                            paragraph.Inlines.Add(run);
+                            paragraph.Foreground = new SolidColorBrush(Colors.Blue);
+                            this.ChangeLogTextBlock.Blocks.Add(paragraph);
+                        }
+                        else if (text.Contains("Error"))
+                        {
+                            string[] split = text.Split("Error");
+                            Paragraph paragraph = new Paragraph();
+                            Run run = new Run();
+                            run.Text = split[1];
+                            paragraph.Inlines.Add(run);
+                            paragraph.Foreground = new SolidColorBrush(Colors.Red);
                             this.ChangeLogTextBlock.Blocks.Add(paragraph);
                         }
                         else
                         {
+                            string[] split = text.Split("Noise");
                             Paragraph paragraph = new Paragraph();
                             Run run = new Run();
-                            run.Text = text;
+                            run.Text = split[1];
                             paragraph.Inlines.Add(run);
+                            paragraph.Foreground = new SolidColorBrush(Colors.LightGray);
                             this.ChangeLogTextBlock.Blocks.Add(paragraph);
                         }
 
